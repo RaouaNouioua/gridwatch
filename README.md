@@ -8,8 +8,6 @@
 
 A production-ready machine learning system for forecasting hourly electricity demand and detecting anomalies in smart grid operations. Built with XGBoost, Isolation Forest, FastAPI, and React.
 
-**🔗 [Live Demo](https://gridwatch-demo.onrender.com)** *(Add your deployment link here)*
-
 ---
 
 ## 📊 Project Overview
