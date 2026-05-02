@@ -1,0 +1,71 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+venv/
+env/
+.env
+*.egg-info/
+
+# Model files (too large for GitHub — add separately or use Git LFS)
+backend/models/*.pkl
+backend/models/*.json
+
+# Keep the model directory structure
+!backend/models/.gitkeep
+
+# Node
+node_modules/
+dist/
+build/
+.next/
+
+# Data
+data/*.csv
+!data/.gitkeep
+
+# IDE
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.env
+*.pkl
+*.json
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Node
+node_modules/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+
+# Data
+data/*.csv
+!data/.gitkeep
+
+# Models (large files)
+models/*.pkl
+models/*.json
+!models/.gitkeep
+
+# OS
+.DS_Store
+Thumbs.db
