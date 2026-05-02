@@ -10,20 +10,20 @@ A production-ready machine learning system for forecasting hourly electricity de
 
 ---
 
-## 📊 Project Overview
+##  Project Overview
 
 GridWatch predicts next-hour electricity demand for PJM Interconnection (serving 65M+ people across 13 US states) with **99.2% accuracy** and detects two distinct types of operational anomalies.
 
 ### Key Features
-- ⚡ **Hourly Load Forecasting**: XGBoost model predicts demand with ±344 MW MAE
-- 🚨 **Dual-Layer Anomaly Detection**: Identifies both demand extremes and pattern breaks
-- 🎯 **Feature Engineering**: 16 engineered features including lag variables and rolling statistics
-- 📈 **Interactive Dashboard**: Real-time visualization of predictions and anomalies
-- 🔧 **Production-Ready API**: FastAPI backend with Swagger documentation
+- **Hourly Load Forecasting**: XGBoost model predicts demand with ±344 MW MAE
+- **Dual-Layer Anomaly Detection**: Identifies both demand extremes and pattern breaks
+- **Feature Engineering**: 16 engineered features including lag variables and rolling statistics
+- **Interactive Dashboard**: Real-time visualization of predictions and anomalies
+-  **Production-Ready API**: FastAPI backend with Swagger documentation
 
 ---
 
-## 🎯 Model Performance
+## Model Performance
 
 | Metric | Value | Interpretation |
 |--------|-------|----------------|
@@ -34,27 +34,27 @@ GridWatch predicts next-hour electricity demand for PJM Interconnection (serving
 
 ---
 
-## 🔬 Key Finding: Two Distinct Anomaly Types
+## Key Finding: Two Distinct Anomaly Types
 
 This project revealed a critical insight for grid operations—there are **two fundamentally different types of anomalies** requiring different detection strategies:
 
-### Type A: Demand Extremes ✅ (Detected by Isolation Forest)
+### Type A: Demand Extremes (Detected by Isolation Forest)
 - **Examples**: July 2006 heat wave (57,084 MW), July 2011 peak (60,689 MW)
 - **Characteristic**: Absolute load values are statistically extreme
 - **Risk**: Physical grid stress, potential blackouts
 - **Detection**: Isolation Forest flags with 100% consistency
 
-### Type B: Pattern Breaks ❌ (Detected by XGBoost Residuals)
+### Type B: Pattern Breaks (Detected by XGBoost Residuals)
 - **Examples**: New Year's Eve 1 AM (8,645 MW error), Polar vortex (8,827 MW error)
 - **Characteristic**: Load values are normal, but expected pattern breaks
 - **Risk**: Forecasting failure → misallocated generation → economic loss
 - **Detection**: Requires monitoring prediction residuals in real-time
 
-> **💡 Insight**: A complete grid monitoring system requires **both** Isolation Forest (for supply-side extremes) **and** residual monitoring (for demand-side surprises).
+> **Insight**: A complete grid monitoring system requires **both** Isolation Forest (for supply-side extremes) **and** residual monitoring (for demand-side surprises).
 
 ---
 
-## 📈 Feature Importance
+## Feature Importance
 
 The model's predictive power is dominated by recent history:
 
@@ -70,7 +70,7 @@ The model's predictive power is dominated by recent history:
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 ┌─────────────────────────────────────────────────────────────────┐
 │ SYSTEM ARCHITECTURE │
 ├─────────────────────────────────────────────────────────────────┤
@@ -107,7 +107,7 @@ text
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - Python 3.9+
@@ -181,7 +181,7 @@ json
         "upper": 52900.5
     }
 }
-🛠️ Technologies Used
+Technologies Used
 Machine Learning
 XGBoost: Gradient boosting for forecasting
 
@@ -209,13 +209,13 @@ Axios: API client
 
 Tailwind CSS: Styling
 
-📂 Dataset
+Dataset
 Source: PJM Interconnection Hourly Energy Consumption
 Period: 2002-2018 (145,366 hours)
 Location: PJM RTO (13 states, 65M+ customers)
 Kaggle: robikscube/hourly-energy-consumption
 
-🎓 Key Learnings
+Key Learnings
 Momentum dominates forecasting: 94.5% of predictive power from lag features
 
 Two anomaly types require different detection: Statistical outliers ≠ prediction failures
@@ -224,13 +224,9 @@ Two anomaly types require different detection: Statistical outliers ≠ predicti
 
 Heat waves are detectable, holidays are not: Isolation Forest catches extremes, misses context shifts
 
-🔮 Future Improvements
+Future Improvements
 Add weather data integration (temperature, humidity)
 
-Implement LSTM neural network for comparison
-
 Add real-time streaming via WebSockets
-
-Deploy to AWS/GCP with CI/CD pipeline
 
 Add user authentication and alert thresholds
