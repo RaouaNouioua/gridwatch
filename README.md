@@ -75,62 +75,80 @@ The model's predictive power is dominated by recent history:
 - Git
 
 ### Backend Setup
-
+ 
 ```bash
 # Clone repository
 git clone https://github.com/yourusername/gridwatch.git
 cd gridwatch/backend
-
+ 
 # Create virtual environment
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
-
+ 
 # Install dependencies
+pip install scikit-learn --only-binary=:all:
 pip install -r requirements.txt
-
-# Copy model files from /models to /backend/models
-cp ../models/*.pkl ./models/
-cp ../models/feature_config.json ./models/
-
+ 
 # Run FastAPI server
 uvicorn app:app --reload --port 8000
-API will be available at http://localhost:8000
-
-Swagger Docs: http://localhost:8000/docs
-
-Health Check: http://localhost:8000/health
-
-Frontend Setup
-bash
+```
+ 
+- API: http://localhost:8000
+- Swagger Docs: http://localhost:8000/docs
+- Health Check: http://localhost:8000/health
+### Frontend Setup
+ 
+```bash
 cd ../frontend
-
+ 
 # Install dependencies
 npm install
-
+ 
 # Run development server
 npm run dev
+```
+ 
 Dashboard will be available at http://localhost:5173
-
-API Endpoints
-Method	Endpoint	Description
-GET	/health	Health check
-POST	/predict	Predict load for next hour
-POST	/predict/range	Predict for multiple hours
-GET	/features/importance	Get feature importance
-POST	/detect/anomaly	Check if current hour is anomalous
-Example Request
-json
+ 
+---
+ 
+## API Endpoints
+ 
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/health` | Health check |
+| POST | `/predict` | Predict load for next hour |
+| GET | `/features/importance` | Get feature importance |
+| GET | `/model/info` | Get model metadata and performance |
+ 
+### Example Request
+ 
+```json
 POST /predict
 {
     "timestamp": "2024-01-15T14:00:00",
     "lag_1_hour": 51200.0,
+    "lag_2_hour": 51000.0,
+    "lag_3_hour": 50800.0,
     "lag_24_hour": 49800.0,
+    "lag_48_hour": 49500.0,
+    "lag_168_hour": 48900.0,
+    "rolling_mean_24h": 50600.0,
+    "rolling_std_24h": 1200.0,
+    "rolling_mean_7d": 49400.0,
     "hour": 14,
+    "dayofweek": 0,
+    "quarter": 1,
     "month": 1,
-    "dayofweek": 0
+    "year": 2024,
+    "dayofyear": 15,
+    "is_weekend": 0
 }
-Example Response
-json
+```
+ 
+### Example Response
+ 
+```json
 {
     "timestamp": "2024-01-15T14:00:00",
     "predicted_load_mw": 52327.5,
@@ -141,8 +159,11 @@ json
         "upper": 52900.5
     }
 }
-
-## Technologies Used
+```
+ 
+---
+ 
+##  Technologies Used
  
 ### Machine Learning
 | Library | Purpose |
@@ -170,7 +191,7 @@ json
  
 ---
  
-##  Dataset
+## Dataset
  
 | Field | Detail |
 |-------|--------|
@@ -192,7 +213,5 @@ json
 ## Future Improvements
  
 - [ ] Add weather data integration (temperature, humidity) as additional features
-- [ ] Implement LSTM neural network for sequence-aware forecasting
 - [ ] Add real-time streaming via WebSockets
-- [ ] Deploy to cloud (AWS / GCP) with CI/CD pipeline
 - [ ] Add user authentication and configurable alert thresholds
