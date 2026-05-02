@@ -4,7 +4,6 @@
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.104+-green.svg)](https://fastapi.tiangolo.com)
 [![React](https://img.shields.io/badge/React-18.2+-61DAFB.svg)](https://reactjs.org)
 [![XGBoost](https://img.shields.io/badge/XGBoost-2.0+-orange.svg)](https://xgboost.ai)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 A production-ready machine learning system for forecasting hourly electricity demand and detecting anomalies in smart grid operations. Built with XGBoost, Isolation Forest, FastAPI, and React.
 
@@ -112,7 +111,7 @@ npm install
 npm run dev
 Dashboard will be available at http://localhost:5173
 
-📡 API Endpoints
+API Endpoints
 Method	Endpoint	Description
 GET	/health	Health check
 POST	/predict	Predict load for next hour
@@ -142,52 +141,58 @@ json
         "upper": 52900.5
     }
 }
-Technologies Used
-Machine Learning
-XGBoost: Gradient boosting for forecasting
 
-Isolation Forest: Unsupervised anomaly detection
-
-Scikit-learn: Feature preprocessing and evaluation
-
-Pandas/NumPy: Data manipulation
-
-Backend
-FastAPI: REST API framework
-
-Pydantic: Data validation
-
-Uvicorn: ASGI server
-
-Joblib: Model serialization
-
-Frontend
-React 18: UI framework
-
-Recharts: Data visualization
-
-Axios: API client
-
-Tailwind CSS: Styling
-
-Dataset
-Source: PJM Interconnection Hourly Energy Consumption
-Period: 2002-2018 (145,366 hours)
-Location: PJM RTO (13 states, 65M+ customers)
-Kaggle: robikscube/hourly-energy-consumption
-
-Key Learnings
-Momentum dominates forecasting: 94.5% of predictive power from lag features
-
-Two anomaly types require different detection: Statistical outliers ≠ prediction failures
-
-1:00 AM is the hardest hour to predict: Pattern breaks after unusual events
-
-Heat waves are detectable, holidays are not: Isolation Forest catches extremes, misses context shifts
-
-Future Improvements
-Add weather data integration (temperature, humidity)
-
-Add real-time streaming via WebSockets
-
-Add user authentication and alert thresholds
+## Technologies Used
+ 
+### Machine Learning
+| Library | Purpose |
+|---------|---------|
+| **XGBoost** | Gradient boosting for hourly load forecasting |
+| **Isolation Forest** | Unsupervised anomaly detection |
+| **Scikit-learn** | Feature preprocessing and model evaluation |
+| **Pandas / NumPy** | Data manipulation and feature engineering |
+ 
+### Backend
+| Library | Purpose |
+|---------|---------|
+| **FastAPI** | REST API framework |
+| **Pydantic** | Data validation and schemas |
+| **Uvicorn** | ASGI server |
+| **Joblib** | Model serialization |
+ 
+### Frontend
+| Library | Purpose |
+|---------|---------|
+| **React 18** | UI framework |
+| **Recharts** | Data visualization |
+| **Axios** | API client |
+| **Tailwind CSS** | Styling |
+ 
+---
+ 
+##  Dataset
+ 
+| Field | Detail |
+|-------|--------|
+| **Source** | PJM Interconnection Hourly Energy Consumption |
+| **Period** | 2002 – 2018 (145,366 hours) |
+| **Location** | PJM RTO — 13 US states, 65M+ customers |
+| **Kaggle** | `robikscube/hourly-energy-consumption` |
+ 
+---
+ 
+##  Key Learnings
+ 
+- **Momentum dominates forecasting** — 94.5% of predictive power comes from lag features alone. What happened 1 hour ago is the strongest signal in the entire dataset.
+- **Two anomaly types require different detection** — Statistical outliers (heat waves) are not the same as prediction failures (holidays, polar vortex). Isolation Forest catches one; residual monitoring catches the other.
+- **1:00 AM is the hardest hour to predict** — All 5 worst predictions occurred at 1 AM after unusual events, where the expected pattern breaks completely.
+- **Heat waves are detectable, holidays are not** — Isolation Forest reliably flags extreme demand volumes but misses context shifts where load values look normal but behavior is abnormal.
+---
+ 
+## Future Improvements
+ 
+- [ ] Add weather data integration (temperature, humidity) as additional features
+- [ ] Implement LSTM neural network for sequence-aware forecasting
+- [ ] Add real-time streaming via WebSockets
+- [ ] Deploy to cloud (AWS / GCP) with CI/CD pipeline
+- [ ] Add user authentication and configurable alert thresholds
