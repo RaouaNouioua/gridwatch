@@ -68,45 +68,6 @@ The model's predictive power is dominated by recent history:
 
 **Key Takeaway**: Lag features account for **94.5%** of total importance—electricity demand behaves like momentum.
 
----
-
-## Architecture
-┌─────────────────────────────────────────────────────────────────┐
-│ SYSTEM ARCHITECTURE │
-├─────────────────────────────────────────────────────────────────┤
-│ │
-│ PJM Hourly Data (145,000 hours) │
-│ │ │
-│ ▼ │
-│ Feature Engineering (16 features) │
-│ │ │
-│ ┌────────┴────────┐ │
-│ │ │ │
-│ ▼ ▼ │
-│ XGBoost Isolation Forest │
-│ (Forecast) (Anomaly Detection) │
-│ │ │ │
-│ ▼ ▼ │
-│ Predictions Type A Anomalies │
-│ (R²=0.992) (Heat waves) │
-│ │ │ │
-│ └────────┬────────┘ │
-│ │ │
-│ ▼ │
-│ Compare Residuals → Type B Anomalies (Pattern breaks) │
-│ │ │
-│ ▼ │
-│ FastAPI Backend (REST API) │
-│ │ │
-│ ▼ │
-│ React Dashboard (Visualization) │
-│ │
-└─────────────────────────────────────────────────────────────────┘
-
-text
-
----
-
 ## Quick Start
 
 ### Prerequisites
